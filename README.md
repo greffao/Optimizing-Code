@@ -1,6 +1,10 @@
 # Optimizing Code
 
-*Lucas Greff Meneses* <br> <br>
+*Lucas Greff Meneses <br>
+Carlos Filipe de Castro Lemos<br>
+Eduardo Souza Rocha<br>
+Henrique Souza Marques*<br>
+<br>
 
 *Institute of Mathematical and Computer Sciences <br>
 University of São Paulo* <br>
