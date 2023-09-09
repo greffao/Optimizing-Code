@@ -3,15 +3,14 @@ install.packages("FrF2", repos = "http://cran.rstudio.com/") # Instala o pacote
 
 library(FrF2) # Carrega o pacote para uso
 
-
 #exemplo do slide (retirado do livro do Jain)
 plan.person = FrF2(nruns = 4,
                    nfactors =  2,
                    replications = 1,
                    repeat.only = FALSE,
                    factor.names = list(
-                     Rede = c("crossbar", "omega"),
-                     Acesso = c("Aleatorio", "Matriz")),
+                     Tecnica = c("Sem Otimização", "Loop Interchange", "Loop Unrolling"),
+                     Alocacao = c("Estática", "Dinâmica")),
                    randomize = FALSE)
 
 #apresenta a configura��o do planejamento de experimentos
