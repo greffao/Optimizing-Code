@@ -2,7 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-#define TAM (100)
+#define TAM (100000)
 #define KB (1024)
 #define MB (1024 * KB)
 #define GB (1024 * MB)
@@ -151,9 +151,9 @@ int main(int argc, char *argv[]){
 	quicksort(copyArray, 0, TAM);
 	
 	// InsertionSort
-	clean_cache();
-	copy(copyArray, array);
-	insertionSort(copyArray, TAM);
+	//clean_cache();
+	//copy(copyArray, array);
+	//insertionSort(copyArray, TAM);
 	
 	return 0;
 }
