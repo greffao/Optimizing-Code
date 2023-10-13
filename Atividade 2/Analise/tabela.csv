@@ -1,0 +1,5 @@
+Algoritmo,Media,Limite_Inferior,Limite_Superior
+bubbleSort,38.559,37.8026,39.3154
+copy,0,0,0
+insertionSort,6.290,6.1422,6.4378
+selectionSort,11.206,10.9507,11.4613

@@ -127,6 +127,43 @@ void insertionSort(int arr[], int n){
 	}
 }
 
+void bubbleSort(int* arr, int n)
+{
+	for(int i = 0; i < n; i++)
+	{
+		for(int j = 0; j < n - 1; j++)
+		{
+			if(arr[j] > arr[j+1])
+			{
+				int aux = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = aux;
+
+			} 
+		}
+	}
+}
+
+void selectionSort(int arr[], int n)
+{
+    int i, j, min_idx;
+ 
+    for (i = 0; i < n-1; i++)
+    {
+        min_idx = i;
+        for (j = i+1; j < n; j++)
+          if (arr[j] < arr[min_idx])
+            min_idx = j;
+ 
+           if(min_idx != i)
+		   {
+			int aux = arr[min_idx];
+			arr[min_idx] = arr[i];
+			arr[i] = aux;
+		   }
+    }
+}
+
 int main(int argc, char *argv[]){
 
 	srand(time(NULL));
@@ -136,24 +173,34 @@ int main(int argc, char *argv[]){
 	for (int i=0; i < TAM; i++)	array[i] = rand() % TAM;
 
 	// MERGE SORT
-	clean_cache();
-	copy(copyArray, array);
-	mergeSort(copyArray, 0, TAM-1);
+	// clean_cache();
+	// copy(copyArray, array);
+	// mergeSort(copyArray, 0, TAM-1);
 
 	// HEAPSORT
-	clean_cache();
-	copy(copyArray, array);
-	heapsort(copyArray, TAM);
+	// clean_cache();
+	// copy(copyArray, array);
+	// heapsort(copyArray, TAM);
 	
 	// QuickSort
-	clean_cache();
-	copy(copyArray, array);
-	quicksort(copyArray, 0, TAM);
+	// clean_cache();
+	// copy(copyArray, array);
+	// quicksort(copyArray, 0, TAM);
 	
 	// InsertionSort
-	//clean_cache();
-	//copy(copyArray, array);
-	//insertionSort(copyArray, TAM);
+	clean_cache();
+	copy(copyArray, array);
+	insertionSort(copyArray, TAM);
+
+	//BubbleSort
+	clean_cache();
+	copy(copyArray, array);
+	bubbleSort(copyArray, TAM);
+
+	//SelectionSort
+	clean_cache();
+	copy(copyArray, array);
+	selectionSort(copyArray, TAM);
 	
 	return 0;
 }
