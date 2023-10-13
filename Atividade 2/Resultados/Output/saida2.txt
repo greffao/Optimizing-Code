@@ -3,11 +3,11 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  ms/call  ms/call  name    
- 91.67      0.11     0.11        3    36.67    36.67  clean_cache
-  8.33      0.12     0.01    99999     0.00     0.00  merge
+ 75.13      0.09     0.09        3    30.05    30.05  clean_cache
+ 16.70      0.11     0.02    99999     0.00     0.00  merge
+  8.35      0.12     0.01        1    10.02    10.02  heapsort
   0.00      0.12     0.00        3     0.00     0.00  copy
-  0.00      0.12     0.00        1     0.00     0.00  heapsort
-  0.00      0.12     0.00        1     0.00    10.00  mergeSort
+  0.00      0.12     0.00        1     0.00    20.04  mergeSort
   0.00      0.12     0.00        1     0.00     0.00  quicksort
 
  %         the percentage of the total running time of the
@@ -37,7 +37,7 @@ name       the name of the function.  This is the minor sort
 	   in parenthesis it shows where it would appear in
 	   the gprof listing if it were to be printed.
 
-Copyright (C) 2012-2022 Free Software Foundation, Inc.
+Copyright (C) 2012-2023 Free Software Foundation, Inc.
 
 Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright
@@ -46,39 +46,39 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 4 byte(s) for 8.33% of 0.12 seconds
+granularity: each sample hit covers 2 byte(s) for 8.32% of 0.12 seconds
 
 index % time    self  children    called     name
                                                  <spontaneous>
 [1]    100.0    0.00    0.12                 main [1]
-                0.11    0.00       3/3           clean_cache [2]
-                0.00    0.01       1/1           mergeSort [4]
-                0.00    0.00       3/3           copy [5]
-                0.00    0.00       1/1           heapsort [6]
+                0.09    0.00       3/3           clean_cache [2]
+                0.00    0.02       1/1           mergeSort [4]
+                0.01    0.00       1/1           heapsort [5]
+                0.00    0.00       3/3           copy [6]
                 0.00    0.00       1/1           quicksort [7]
 -----------------------------------------------
-                0.11    0.00       3/3           main [1]
-[2]     91.7    0.11    0.00       3         clean_cache [2]
+                0.09    0.00       3/3           main [1]
+[2]     75.0    0.09    0.00       3         clean_cache [2]
 -----------------------------------------------
-                0.01    0.00   99999/99999       mergeSort [4]
-[3]      8.3    0.01    0.00   99999         merge [3]
+                0.02    0.00   99999/99999       mergeSort [4]
+[3]     16.7    0.02    0.00   99999         merge [3]
 -----------------------------------------------
                               199998             mergeSort [4]
-                0.00    0.01       1/1           main [1]
-[4]      8.3    0.00    0.01       1+199998  mergeSort [4]
-                0.01    0.00   99999/99999       merge [3]
+                0.00    0.02       1/1           main [1]
+[4]     16.7    0.00    0.02       1+199998  mergeSort [4]
+                0.02    0.00   99999/99999       merge [3]
                               199998             mergeSort [4]
+-----------------------------------------------
+                0.01    0.00       1/1           main [1]
+[5]      8.3    0.01    0.00       1         heapsort [5]
 -----------------------------------------------
                 0.00    0.00       3/3           main [1]
-[5]      0.0    0.00    0.00       3         copy [5]
+[6]      0.0    0.00    0.00       3         copy [6]
 -----------------------------------------------
+                              118454             quicksort [7]
                 0.00    0.00       1/1           main [1]
-[6]      0.0    0.00    0.00       1         heapsort [6]
------------------------------------------------
-                              118747             quicksort [7]
-                0.00    0.00       1/1           main [1]
-[7]      0.0    0.00    0.00       1+118747  quicksort [7]
-                              118747             quicksort [7]
+[7]      0.0    0.00    0.00       1+118454  quicksort [7]
+                              118454             quicksort [7]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -163,7 +163,7 @@ index % time    self  children    called     name
  for that member, how many times it was called from other members of
  the cycle.
 
-Copyright (C) 2012-2022 Free Software Foundation, Inc.
+Copyright (C) 2012-2023 Free Software Foundation, Inc.
 
 Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright
@@ -171,5 +171,5 @@ notice and this notice are preserved.
 
 Index by function name
 
-   [2] clean_cache             [6] heapsort                [4] mergeSort
-   [5] copy                    [3] merge                   [7] quicksort
+   [2] clean_cache             [5] heapsort                [4] mergeSort
+   [6] copy                    [3] merge                   [7] quicksort

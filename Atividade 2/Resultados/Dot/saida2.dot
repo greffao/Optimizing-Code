@@ -1,0 +1,20 @@
+digraph {
+	graph [fontname=Arial, nodesep=0.125, ranksep=0.25];
+	node [fontcolor=white, fontname=Arial, height=0, shape=box, style=filled, width=0];
+	edge [fontname=Arial];
+	1 [color="#ff0000", fontcolor="#ffffff", fontsize="10.00", label="main\n100.00%\n(0.00%)"];
+	1 -> 2 [arrowsize="0.87", color="#dada06", fontcolor="#dada06", fontsize="10.00", label="75.00%\n3×", labeldistance="3.00", penwidth="3.00"];
+	1 -> 4 [arrowsize="0.41", color="#0c5f88", fontcolor="#0c5f88", fontsize="10.00", label="16.67%\n1×", labeldistance="0.67", penwidth="0.67"];
+	1 -> 5 [arrowsize="0.35", color="#0d327d", fontcolor="#0d327d", fontsize="10.00", label="8.33%\n1×", labeldistance="0.50", penwidth="0.50"];
+	1 -> 6 [arrowsize="0.35", color="#0d0d73", fontcolor="#0d0d73", fontsize="10.00", label="0.00%\n3×", labeldistance="0.50", penwidth="0.50"];
+	1 -> 7 [arrowsize="0.35", color="#0d0d73", fontcolor="#0d0d73", fontsize="10.00", label="0.00%\n1×", labeldistance="0.50", penwidth="0.50"];
+	2 [color="#dada06", fontcolor="#ffffff", fontsize="10.00", label="clean_cache\n75.00%\n(75.00%)\n3×"];
+	3 [color="#0c5f88", fontcolor="#ffffff", fontsize="10.00", label="merge\n16.67%\n(16.67%)\n99999×"];
+	4 [color="#0c5f88", fontcolor="#ffffff", fontsize="10.00", label="mergeSort\n16.67%\n(0.00%)\n199999×"];
+	4 -> 3 [arrowsize="0.41", color="#0c5f88", fontcolor="#0c5f88", fontsize="10.00", label="16.67%\n99999×", labeldistance="0.67", penwidth="0.67"];
+	4 -> 4 [arrowsize="0.41", color="#0c5f88", fontcolor="#0c5f88", fontsize="10.00", label="199998×", labeldistance="0.67", penwidth="0.67"];
+	5 [color="#0d327d", fontcolor="#ffffff", fontsize="10.00", label="heapsort\n8.33%\n(8.33%)\n1×"];
+	6 [color="#0d0d73", fontcolor="#ffffff", fontsize="10.00", label="copy\n0.00%\n(0.00%)\n3×"];
+	7 [color="#0d0d73", fontcolor="#ffffff", fontsize="10.00", label="quicksort\n0.00%\n(0.00%)\n118455×"];
+	7 -> 7 [arrowsize="0.35", color="#0d0d73", fontcolor="#0d0d73", fontsize="10.00", label="118454×", labeldistance="0.50", penwidth="0.50"];
+}
