@@ -1,0 +1,20 @@
+total 208
+drwxr-xr-x 2 filipe users  4096 nov  1 11:22 .
+drwxr-xr-x 5 filipe users  4096 nov  1 11:21 ..
+-rwxr-xr-x 1 root   root  16184 nov  1 11:22 code1_0.ex
+-rwxr-xr-x 1 root   root  16184 nov  1 11:22 code1_1.ex
+-rwxr-xr-x 1 root   root  16184 nov  1 11:22 code1_2.ex
+-rwxr-xr-x 1 root   root  16184 nov  1 11:22 code1_3.ex
+-rw-r--r-- 1 filipe users 11894 nov  1 08:19 code1.c
+-rwxr-xr-x 1 root   root  16136 nov  1 11:22 code1_s.ex
+-rwxr-xr-x 1 root   root  16032 nov  1 11:22 code2_0.ex
+-rwxr-xr-x 1 root   root  16072 nov  1 11:22 code2_1.ex
+-rwxr-xr-x 1 root   root  16072 nov  1 11:22 code2_2.ex
+-rwxr-xr-x 1 root   root  16072 nov  1 11:22 code2_3.ex
+-rw-r--r-- 1 filipe users 12262 nov  1 07:35 code2.c
+-rwxr-xr-x 1 root   root  16032 nov  1 11:22 code2_s.ex
+-rw-r--r-- 1 root   root    810 nov  1 11:22 compile.metrics
+-rw-r--r-- 1 root   root    640 nov  1 11:22 execution.metrics
+-rwxrwxrwx 1 filipe users  1320 nov  1 11:15 execution.sh
+-rwxrwxrwx 1 filipe users  1288 nov  1 11:20 script.sh
+-rw-r--r-- 1 root   root      0 nov  1 11:22 size_programs.metrics

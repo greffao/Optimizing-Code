@@ -1,0 +1,10 @@
+./code1_0.ex 10000  0,42s user 0,00s system 99% cpu 0,430 total
+./code1_1.ex 10000  0,41s user 0,01s system 99% cpu 0,419 total
+./code1_2.ex 10000  0,42s user 0,00s system 99% cpu 0,420 total
+./code1_3.ex 10000  0,42s user 0,00s system 99% cpu 0,420 total
+./code1_s.ex 10000  0,41s user 0,00s system 99% cpu 0,417 total
+./code2_0.ex 10000  0,41s user 0,00s system 99% cpu 0,410 total
+./code2_1.ex 10000  0,39s user 0,01s system 99% cpu 0,401 total
+./code2_2.ex 10000  0,39s user 0,01s system 99% cpu 0,401 total
+./code2_3.ex 10000  0,40s user 0,00s system 99% cpu 0,398 total
+./code2_s.ex 10000  0,40s user 0,00s system 99% cpu 0,404 total

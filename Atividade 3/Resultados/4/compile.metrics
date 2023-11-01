@@ -1,0 +1,10 @@
+gcc -O0 -lgmp code1.c -o code1_0.ex  0,01s user 0,02s system 98% cpu 0,035 total
+gcc -O1 -lgmp code1.c -o code1_1.ex  0,03s user 0,01s system 98% cpu 0,041 total
+gcc -O2 -lgmp code1.c -o code1_2.ex  0,04s user 0,01s system 98% cpu 0,046 total
+gcc -O3 -lgmp code1.c -o code1_3.ex  0,03s user 0,01s system 99% cpu 0,048 total
+gcc -Os -lgmp code1.c -o code1_s.ex  0,04s user 0,01s system 99% cpu 0,043 total
+gcc -O0 -lgmp code2.c -o code2_0.ex  0,03s user 0,01s system 99% cpu 0,034 total
+gcc -O1 -lgmp code2.c -o code2_1.ex  0,03s user 0,01s system 98% cpu 0,041 total
+gcc -O2 -lgmp code2.c -o code2_2.ex  0,03s user 0,01s system 98% cpu 0,042 total
+gcc -O3 -lgmp code2.c -o code2_3.ex  0,03s user 0,01s system 98% cpu 0,043 total
+gcc -Os -lgmp code2.c -o code2_s.ex  0,03s user 0,01s system 98% cpu 0,041 total
