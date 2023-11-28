@@ -1,0 +1,195 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[portuguese]{babel}
+\usepackage[a4paper]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}      % letra, símbolos, etc.
+\usepackage{cmap}
+\usepackage{setspace} % Espaçamento entre linhas 
+\usepackage{microtype} % espaçamento entre letras e palavras, colocar depois da fonte
+\usepackage{siunitx} % unidade si 
+\sisetup{output-decimal-marker = {,}}
+\usepackage[version=4]{mhchem}
+\usepackage{caption} % caption
+\usepackage{subcaption} % caption   
+\usepackage{graphicx}     % gráficos
+\usepackage{tabularx}     % tabelas
+\usepackage{booktabs}  
+\usepackage[table]{xcolor} % cores
+\usepackage{multirow}
+\usepackage{makeidx}
+\usepackage{ragged2e}
+\addto\captionsportuguese{\renewcommand{\refname}{Referências}}
+\usepackage[colorlinks=true,citecolor=black,linkcolor=black,bookmarks=true]{hyperref}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{indentfirst}
+
+\onehalfspacing
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+\thispagestyle{empty}
+\begin{minipage}{\textwidth}\centering
+Universidade de São Paulo \\
+Instituto de Ciências Matemáticas e Computação \\
+Desenvolvimento de Código Otimizado - SSC 0951 \\
+\end{minipage}
+
+\vspace{5cm}
+
+\begin{minipage}{\textwidth}\centering
+\Large Relatório Trabalho 4  \\
+\vspace{2cm}
+\Large \textbf{Vetorização}
+\end{minipage}
+
+\vspace{3cm}
+
+\begin{minipage}{\linewidth}\centering
+\begin{enumerate}
+     \item Lucas G. Meneses   \space \space \space \space \space \space  Número: 13671615
+      \item Henrique S. Marques  \space \space Número: 11815722
+      \item Carlos F. C. Lemos  \space \space \space \space Número: 12542630
+\end{enumerate}
+\end{minipage}
+
+\vfill
+
+\begin{minipage}{\linewidth}
+\centering\today, \\
+São Carlos, SP, \\
+Brasil
+\end{minipage}
+
+\clearpage
+\thispagestyle{empty}
+
+\tableofcontents
+
+\section{Introdução}
+
+
+A vetorização de código é uma técnica crucial na otimização de desempenho de programas, especialmente em computação de alto desempenho e programação paralela. Essa abordagem visa aproveitar as capacidades dos processadores modernos, que muitas vezes são equipados com conjuntos de instruções SIMD (\textit{Single Instruction, Multiple Data}). Essas instruções permitem que operações sejam executadas, simultaneamente, em vetores ou matrizes, acelerando significativamente o processamento. Existem duas abordagens principais para vetorização de código: a vetorização automática via compilador e a vetorização manual pelo uso de instruções específicas (\textit{intrinsics}).
+
+Ao compilar código-fonte, os compiladores modernos, como o \texttt{g++}, podem analisar \textit{loops} e operações em \textit{arrays} e automaticamente transformar o código para aproveitar instruções SIMD quando possível. A opção de compilação \texttt{-ftree-vectorize} no \texttt{g++} ativa a vetorização automática, permitindo ao compilador decidir quais partes do código podem ser vetorizadas. Por outro lado, a vetorização manual envolve o programador utilizar funções fornecidas por bibliotecas de desenvolvimento para representar diretamente as instruções SIMD. Essas instruções permitem ao programador ter controle total sobre a vetorização, escolhendo as operações específicas e otimizando para casos particulares.
+
+Neste contexto, a tarefa proposta visa comparar a eficácia da vetorização automática pelo compilador, a vetorização manual usando instruções \textit{intrinsics} e a não-vetorização, no que se diz respeito ao acesso à memória \textit{cache} e tempo de execução.
+
+\section{Metodologia}
+
+Para a realização de todos os experimentos, foi utilizado um computador rodando o Sistema Operacional Ubuntu, cuja CPU é um Intel Core i5 6600k com frequência de \textit{clock} de \SI{3,5}{\giga\hertz}, 4 núcleos e 4 \textit{threads}. Quanto à memória, o computador faz uso de \SI{16}{\giga\byte} de RAM do tipo DDR4, cache L1 de dados e de instruções ambas 8-\textit{way} com $4 \times \SI{32}{\kilo\byte}$ de capacidade, L2 4-\textit{way} $4 \times \SI{256}{\kilo\byte}$ e L3 12-\textit{way} de \SI{6}{\mega\byte}.
+
+Nesse sentido, a não-vetorização de código, a vetorização automática via compilador (\texttt{g++}) e a vetorização por meio de instruções \href{https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#}{\textit{intrinsics}} foram testadas através de um código contendo multiplicação e soma de matrizes $24 \times 24$. Desse modo, cada um dos testes foi executado 10 vezes, sendo cálculado as médias aritméticas e intervalos de confiança (\SI{95}{\percent} das métricas: (i) tempo de execução (Seção \ref{sec:tempo_execucao}); (ii) quantidade total de acessos à memória \textit{cache} (Seção \ref{sec:acesso_cache}); (iii) quantidade total de \textit{cache misses} (Seção \ref{sec:cache_misses}). Por fim, o código e os dados obtidos estão disponíveis em repositório aberto via \href{https://github.com/greffao/Optimizing-Code}{GitHub}.  
+
+\section{Resultados}
+
+\subsection{Tempo de Execução} \label{sec:tempo_execucao}
+
+Os resultados dos experimentos apresentados na Tabela \ref{tab:tempo_execucao} revelam claramente o impacto significativo da vetorização no desempenho do código. Ao comparar os tempos de execução, observamos que a versão sem vetorização possui tempos consideravelmente mais elevados, com uma média aritmética de aproximadamente \SI{3,1}{\second}. Em contraste, a vetorização pelo compilador reduz drasticamente os tempos para uma média de \SI{0,002}{\second}, enquanto a vetorização intrínseca apresenta um desempenho ligeiramente superior, com uma média de \SI{0,004}{\second}.
+
+Ao analisar os intervalos de confiança a \SI{95}{\percent} de confiança, observamos que as variações nos tempos de execução são mais consistentes na vetorização pelo compilador, indicando uma estabilidade maior em comparação com a vetorização pelo programador. Em última análise, esses resultados destacam a importância da vetorização no contexto de otimização de código, permitindo uma execução mais eficiente e rápida de operações em matrizes.
+
+\begin{table}[H]
+  \centering
+  \caption{Tempos de execução (\si{\second}), médias aritméticas e intervalos de confiança obtidos para os 10 experimentos realizados para o código sem vetorização, com vetorização pelo compilador e com vetorização \textit{intrinsics}}
+  \label{tab:tempo_execucao}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lccc}
+      \toprule
+       \textbf{Experimento} & \textbf{Sem Vetorização} & \textbf{Vetorização Compilador} & \textbf{Vetorização \textit{Intrinsics}} \\
+      \midrule
+      \multirow{10}{*}{\textbf{Tempos de Execução (\si{\second})}} & {3,071371827} & {0,001703616} & {0,006194783} \\
+                                           & {3,086012535} & {0,001876712} & {0,003267244} \\
+                                           & {3,066365197} & {0,001666195} & {0,003275400} \\
+                                           & {3,083345884} & {0,002079098} & {0,006265360} \\
+                                           & {3,076254198} & {0,001561162} & {0,003407487} \\
+                                           & {3,086721908} & {0,001814857} & {0,006235915} \\
+                                           & {3,137937281} & {0,001705785} & {0,003359132} \\
+                                           & {3,075123578} & {0,002215630} & {0,003373285} \\
+                                           & {3,081899078} & {0,001904354} & {0,003202259} \\
+                                           & {3,258685771} & {0,001696352} & {0,003296298} \\
+      \midrule
+      \textbf{Média Aritmética (\si{\second})} & {3,1023717} & {0,0018224} & {0,0041877} \\
+      \textbf{Intervalo de Confiança (\SI{95}{\percent})} & {[3,0606087{~},{~}3,1441347]} & {[0,0016780{~},{~}0,0019667]} & {[0,0031776{~},{~}0.0051978]} \\
+      \bottomrule
+    \end{tabular}%
+  }
+\end{table}
+
+
+\subsection{Acesso à \textit{Cache}} \label{sec:acesso_cache}
+
+Os resultados relacionados ao acesso à memória \textit{cache}, apresentados na Tabela \ref{tab:acesso_cache}, oferecem alguns \textit{insights} sobre o impacto da vetorização nas operações de leitura e gravação na \textit{cache}. A análise dos números totais de acessos à \textit{cache} revela uma diferença notável entre os diferentes métodos de otimização. Na versão sem vetorização, o número médio de acessos é significativamente maior, atingindo uma média aritmética de $407954,9$ acessos. Em contraste, a vetorização pelo compilador e a vetorização intrínseca resultam em reduções substanciais, com médias de $142426,0$ e $140586,1$ acessos, respectivamente.
+
+Essa discrepância nos números de acessos à \textit{cache} pode ser explicada pela capacidade da vetorização de processar dados em paralelo, reduzindo a necessidade de acessos frequentes à memória. A vetorização, portanto, otimiza o uso da \textit{cache}, minimizando a movimentação de dados e atuando na melhoria de eficiência do código, conforme discutido na Seção \ref{sec:tempo_execucao}.
+
+Ao analisar os intervalos de \SI{95}{\percent} de confiança, observamos que, embora a média de acessos seja menor nas versões vetorizadas, a variação nos resultados é relativamente consistente em ambas as abordagens de vetorização. Isso sugere que, em termos de acessos à \textit{cache}, tanto a vetorização pelo compilador quanto a vetorização manual oferecem estabilidade similar.
+
+\begin{table}[H]
+  \centering
+  \caption{Número total de acessos à memória \textit{cache}, médias aritméticas e intervalos de confiança obtidos para os 10 experimentos realizados para o código sem vetorização, com vetorização pelo compilador e com vetorização \textit{intrinsics}}
+  \label{tab:acesso_cache}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lccc}
+      \toprule
+       \textbf{Experimento} & \textbf{Sem Vetorização} & \textbf{Vetorização Compilador} & \textbf{Vetorização \textit{Intrinsics}} \\
+      \midrule
+      \multirow{10}{*}{\textbf{Número de Acessos à \textit{Cache}}} & 203088 & 146013 & 147808 \\
+                                           & {514254} & {148009} & {138266} \\
+                                           & {177207} & {147162} & {137225} \\
+                                           & {560863} & {137725} & {141209} \\
+                                           & {227324} & {137395} & {134835} \\
+                                           & {518490} & {141583} & {142374} \\
+                                           & {505803} & {141503} & {149419} \\
+                                           & {473696} & {139839} & {140076} \\
+                                           & {519125} & {146161} & {138004} \\
+                                           & {379699} & {138870} & {136645} \\
+      \midrule
+      \textbf{Média Aritmética} & {407954,9} & {142426,0} & {140586,1} \\
+      \textbf{Intervalo de Confiança (\SI{95}{\percent})} & {[300838,5{~},{~}515071,3]} & {[139518,0{~},{~}145334,0]} & {[137163,9{~},{~}144008,3]} \\
+      \bottomrule
+    \end{tabular}%
+  }
+\end{table}
+
+
+\subsection{\textit{Cache Misses}} \label{sec:cache_misses}
+
+Ao comparar os resultados descritos na Seção \ref{sec:acesso_cache} e a Tabela \ref{tab:cache_misses}, fica evidente a relação entre a redução do número total de acessos à \textit{cache} e a diminuição dos \textit{cache misses}. Os \textit{cache misses} ocorrem quando o processador não consegue encontrar os dados necessários na memória \textit{cache}, sendo forçado a buscar na memória principal. Portanto, ao reduzir o número geral de acessos à \textit{cache}, a vetorização contribui diretamente para a mitigação dos \textit{cache misses}, resultando em operações de memória mais eficientes e rápidas. Os intervalos de confiança a \SI{95}{\percent} reforçam a consistência das versões vetorizadas, indicando uma variação menor nos resultados. 
+
+\begin{table}[H]
+  \centering
+  \caption{Número total de \textit{cache misses}, médias aritméticas e intervalos de confiança obtidos para os 10 experimentos realizados para o código sem vetorização, com vetorização pelo compilador e com vetorização \textit{intrinsics}}
+  \label{tab:cache_misses}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lccc}
+      \toprule
+       \textbf{Experimento} & \textbf{Sem Vetorização} & \textbf{Vetorização Compilador} & \textbf{Vetorização \textit{Intrinsics}} \\
+      \midrule
+      \multirow{10}{*}{\textbf{Número de \textit{Cache Misses}}} & 64226 & 49934 & 67931 \\
+                                           & { 84730}	 & {48494} & {51972} \\
+                                           & { 59253}	 & {48652} & {45000} \\
+                                           & { 58296}	 & {45505} & {51132} \\
+                                           & { 72746}	 & {45474} & {66533} \\
+                                           & { 87831}	 & {47280} & {51901} \\
+                                           & { 68527}	 & {45962} & {52558} \\
+                                           & { 60152}	 & {45964} & {64717} \\
+                                           & { 57575}	 & {49447} & {45762} \\
+                                           & {230276}    & {45721} & {51718} \\
+      \midrule
+      \textbf{Média Aritmética} & {84361,2} & {47243,3} & {54922,4} \\
+      \textbf{Intervalo de Confiança (\SI{95}{\percent})} & {[46879,59{~},{~}121842,81]} & {[45995,26{~},{~}48491,34]} & {[48935,44{~},{~}60909,36]} \\
+      \bottomrule
+    \end{tabular}%
+  }
+\end{table}
+
+\section{Conclusões}
+
+A análise dos resultados obtidos, referentes aos tempos de execução, acessos à \textit{cache} e \textit{cache misses}, proporcionou alguns \textit{insights} sobre a influência direta da vetorização no desempenho do código. A partir dos dados apresentados na Tabela \ref{tab:tempo_execucao}, tornou-se evidente que a vetorização, tanto pelo compilador quanto pelo programador, desempenha um papel crucial na redução significativa dos tempos de execução. A capacidade de realizar operações em paralelo em conjuntos de dados permitiu uma execução mais eficiente, culminando em tempos de execução notavelmente inferiores em comparação com a versão não vetorizada.
+
+Ao abordar os aspectos de acesso à memória \textit{cache}, conforme evidenciado nas Tabelas \ref{tab:acesso_cache} e \ref{tab:cache_misses}, observou-se uma redução significativa no número total de referências à \textit{cache}, contribuindo diretamente para a minimização de \textit{cache misses}. A vetorização emergiu, portanto, como uma estratégia eficaz para otimizar o comportamento global de acesso à memória e, consequentemente, o desempenho computacional como um todo. A consistência nos resultados das versões vetorizadas, evidenciada pelos intervalos de confiança a \SI{95}{\percent}, reforça a robustez dessas otimizações.
+
+\end{document}
